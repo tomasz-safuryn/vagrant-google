@@ -39,10 +39,6 @@ module VagrantPlugins
       class InstanceReadyTimeout < VagrantGoogleError
         error_key(:instance_ready_timeout)
       end
-
-      class RsyncError < VagrantGoogleError
-        error_key(:rsync_error)
-      end
     end
   end
 end

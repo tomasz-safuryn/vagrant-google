@@ -262,13 +262,29 @@ emit a warning, but will otherwise boot the GCE machine.
 
 ## Synced Folders
 
+
 There is minimal support for synced folders. Upon `vagrant up`,
-`vagrant reload`, and `vagrant provision`, the Google provider will use
-`rsync` (if available) to uni-directionally sync the folder to the remote
+`vagrant reload` the Google provider will use
+`rsync` to uni-directionally sync the folder to the remote
 machine over SSH.
+
+See [Vagrant Synced folders: rsync](https://docs.vagrantup.com/v2/synced-folders/rsync.html)
 
 This is good enough for all built-in Vagrant provisioners (`shell`, `chef`, and
 `puppet`) to work!
+
+```ruby
+Vagrant.configure("2") do |config|
+  config.vm.box = "google/gce"
+
+  config.vm.provider :google do |google, override|
+  end
+
+  config.vm.synced_folder ".", "/vagrant", type: "rsync",
+    rsync__exclude: ".git/"
+end
+```
+
 
 ## Development
 
